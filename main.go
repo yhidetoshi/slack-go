@@ -15,13 +15,22 @@ var (
 func main() {
 	api := slack.New(SLACK_TOKEN)
 	attachment := slack.Attachment{
-		Pretext: "some pretext",
-		Text:    "some text",
+		Title: "Title",
+		Text:  "",
+		Color: "good",
 
 		Fields: []slack.AttachmentField{
 			slack.AttachmentField{
-				Title: "hoge",
-				Value: "fuga",
+				Title: "Item1",
+				Value: "```" + "this is sample value" + "```",
+				Short: false,
+			}, slack.AttachmentField{
+				Title: "Item2",
+				Value: "```" + "this is sample value" + "```",
+				Short: false,
+			}, slack.AttachmentField{
+				Title: "Item3",
+				Value: "```" + "this is sample value" + "```",
 				Short: false,
 			},
 		},
@@ -29,7 +38,7 @@ func main() {
 
 	channelID, timestamp, err := api.PostMessage(
 		CHANNEL_ID,
-		slack.MsgOptionText("Result", false),
+		slack.MsgOptionText("Title", false),
 		slack.MsgOptionAttachments(attachment),
 		slack.MsgOptionAsUser(true),
 	)
