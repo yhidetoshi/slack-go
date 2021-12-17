@@ -1,3 +1,6 @@
+/* Secondary message attachments
+Ref: https://api.slack.com/reference/messaging/attachments
+*/
 package main
 
 import (
@@ -15,22 +18,28 @@ var (
 func main() {
 	api := slack.New(SLACK_TOKEN)
 	attachment := slack.Attachment{
-		Title: "Title",
-		Text:  "",
-		Color: "good",
+		Pretext:    "This is slack post test by Go",
+		Title:      "title",
+		Color:      "good",
+		AuthorName: "author_name",
+		AuthorIcon: "https://placeimg.com/16/16/people",
+		MarkdownIn: []string{"`textTomarkdown`"},
+		Text:       "hello world `textTomarkdown`",
+		ThumbURL:   "http://placekitten.com/g/200/200",
+		FooterIcon: "https://platform.slack-edge.com/img/default_application_icon.png",
 
 		Fields: []slack.AttachmentField{
 			slack.AttachmentField{
 				Title: "Item1",
-				Value: "```" + "this is sample value" + "```",
+				Value: "this is value of item1",
 				Short: false,
 			}, slack.AttachmentField{
 				Title: "Item2",
-				Value: "```" + "this is sample value" + "```",
-				Short: false,
+				Value: "this is value of item2",
+				Short: true,
 			}, slack.AttachmentField{
 				Title: "Item3",
-				Value: "```" + "this is sample value" + "```",
+				Value: "```" + "this is value of item3" + "```",
 				Short: false,
 			},
 		},
@@ -38,7 +47,7 @@ func main() {
 
 	channelID, timestamp, err := api.PostMessage(
 		CHANNEL_ID,
-		slack.MsgOptionText("Title", false),
+		slack.MsgOptionText("This is Title", false),
 		slack.MsgOptionAttachments(attachment),
 		slack.MsgOptionAsUser(true),
 	)
