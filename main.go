@@ -20,7 +20,7 @@ func main() {
 	attachment := slack.Attachment{
 		Pretext:    "This is slack post test by Go",
 		Title:      "title",
-		Color:      "good",
+		Color:      "#36a64f",
 		AuthorName: "author_name",
 		AuthorIcon: "https://placeimg.com/16/16/people",
 		MarkdownIn: []string{"`textTomarkdown`"},
